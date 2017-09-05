@@ -25,6 +25,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "body-parser": "^1.17.2",
+    "codemirror": "^5.29.0",
     "compression": "^1.7.0",
     "connect-flash": "^0.1.1",
     "copy-webpack-plugin": "^4.0.1",
@@ -51,6 +52,9 @@
     "poet": "^2.0.2",
     "rimraf": "^2.6.1",
     "style-loader": "^0.18.2",
+    "vue": "^2.4.2",
+    "vue-loader": "^13.0.4",
+    "vue-template-compiler": "^2.4.2",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1",
     "whatwg-fetch": "^2.0.3"
@@ -62,8 +66,7 @@
     "cross-env": "^3.2.4",
     "istanbul": "0.4.5",
     "mocha": "^3.2.0",
-    "supertest": "^3.0.0",
-    "vue": "^2.4.2"
+    "supertest": "^3.0.0"
   },
   "scripts": {
     "test": "npm run lint && mocha test/*.test.js",
@@ -71,7 +74,7 @@
     "lint:js": "eslint --ext js,vue src/** server/** test/**",
     "build": "rimraf dist && npm run build:style && npm run build:editor",
     "build:style": "lessc style/profile.less dist/style/profile.css && lessc style/blog.less dist/style/blog.css && lessc style/about.less dist/style/about.css",
-    "build:editor": "cross-env NODE_ENV=production webpack --config build/webpack.editor.js --progress --hide-modules",
+    "build:editor": "cross-env NODE_ENV=production webpack --config build/webpack.editor.js --progress",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:client": "rimraf dist && npm run build:style && webpack-dev-server --config build/webpack.editor.js --hot --open",
     "dev:server": "node server/app.js"

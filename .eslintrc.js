@@ -6,7 +6,8 @@ module.exports = {
     ],
     "rules": {
       "one-var": 0,
-      "no-underscore-dangle": "off",
+      "no-underscore-dangle": 0,
+      "import/prefer-default-export": 0
     },
     "globals": {
       "document": 1,

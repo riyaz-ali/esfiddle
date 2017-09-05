@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * esfiddle editor build configuration
  */
@@ -8,7 +9,7 @@ let webpack = require('webpack');
 let HtmlPlugin = require('html-webpack-plugin');
 let HtmlHDDPlugin = require('html-webpack-harddisk-plugin');
 let CopyPlugin = require('copy-webpack-plugin');
-let ImageminPlugin = require('imagemin-webpack-plugin');
+//let ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 module.exports = {
   // application entry point
@@ -22,6 +23,14 @@ module.exports = {
     filename: 'esfiddle.[hash].js',
     // the url to the output directory resolved relative to the HTML page
     publicPath: '/js/'
+  },
+
+  resolve: {
+    extensions: ['.js', '.vue'],
+    alias: {
+      // shorthand syntax to import files from src folder without ugly paths
+      '@': path.resolve(__dirname, '../src/editor')
+    }
   },
   
   // module and loader configurations
@@ -60,6 +69,13 @@ module.exports = {
         loader: 'html-loader'
       },
     ]
+  },
+
+  externals: {
+    // Don't follow/bundle these modules, but request them at runtime from the environment
+    'vue': 'Vue',   // window['Vue']
+    'jshint': 'JSHINT',  // window['JSHINT']
+    'codemirror': 'CodeMirror'
   },
 
   plugins: [
@@ -111,10 +127,10 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     }),
-    new ImageminPlugin({
-      pngquant: {
-        quality: '95-100'
-      }
-    })
+    // new ImageminPlugin({
+    //   pngquant: {
+    //     quality: '95-100'
+    //   }
+    // })
   ])
 }
