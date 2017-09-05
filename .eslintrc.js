@@ -1,5 +1,8 @@
 module.exports = {
-    "extends": "airbnb",
+    "extends": [
+      "airbnb",
+      "plugin:vue/recommended"
+    ],
     "plugins": [
         "import",
         "html"
@@ -7,7 +10,9 @@ module.exports = {
     "rules": {
       "one-var": 0,
       "no-underscore-dangle": 0,
-      "import/prefer-default-export": 0
+      "import/prefer-default-export": 0,
+      "import/extensions": 0,
+      "import/no-unresolved": 0
     },
     "globals": {
       "document": 1,

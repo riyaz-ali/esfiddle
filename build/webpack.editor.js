@@ -64,6 +64,10 @@ module.exports = {
         ],
         exclude: /node_modules/
       },
+      { // rule to load external css
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
       { // rule to load template files
         test: /\.html$/,
         loader: 'html-loader'
