@@ -100,7 +100,7 @@ module.exports = {
   devServer: {
     port: 3000,
     proxy: {
-      '/': 'http://localhost:3001'
+    //  '/': 'http://localhost:3001'
     },
     contentBase: [
       path.resolve(__dirname, '../dist'), // for resolving styles
