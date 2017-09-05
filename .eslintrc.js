@@ -1,7 +1,8 @@
 module.exports = {
     "extends": "airbnb",
     "plugins": [
-        "import"
+        "import",
+        "html"
     ],
     "rules": {
       "one-var": 0,

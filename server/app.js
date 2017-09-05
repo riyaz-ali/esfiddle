@@ -11,7 +11,7 @@ const Poet = require('poet');
 const path = require('path');
 
 const app = express();
-const port = Number(process.env.PORT || 5001);
+const port = Number(process.env.PORT || 3001);
 
 const poet = Poet(app, {
   posts: './_posts',
