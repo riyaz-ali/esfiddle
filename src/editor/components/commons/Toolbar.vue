@@ -2,16 +2,16 @@
   <div class="esf toolbar">
     <ul>
       <li class="hint--bottom" aria-label="Run fiddle">
-        <a href="javascript:void(0);"><i class="fa fa-play-circle"></i></a>
+        <a href="javascript:void(0);" @click="onRun"><i class="fa fa-play-circle"></i></a>
       </li>
       <li class="hint--bottom" aria-label="Save fiddle">
-        <a href="javascript:void(0);"><i class="fa fa-save"></i></a>
+        <a href="javascript:void(0);" @click="onSave"><i class="fa fa-save"></i></a>
       </li>
       <li class="hint--bottom" aria-label="Lint fiddle">
-        <a href="javascript:void(0);"><i class="fa fa-eraser"></i></a>
+        <a href="javascript:void(0);" @click="onLint"><i class="fa fa-eraser"></i></a>
       </li>
       <li class="hint--bottom" aria-label="Tidy up fiddle">
-        <a href="javascript:void(0);"><i class="fa fa-align-left"></i></a>
+        <a href="javascript:void(0);" @click="onTidy"><i class="fa fa-align-left"></i></a>
       </li>
     </ul>
   </div>  
@@ -29,6 +29,10 @@ export default {
       required: true
     },
     onLint: {
+      type: Function,
+      required: true
+    },
+    onTidy: {
       type: Function,
       required: true
     }
