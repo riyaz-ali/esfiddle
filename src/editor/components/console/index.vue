@@ -86,6 +86,21 @@ export default {
 
     .display {
       overflow: auto; // custom codemirror styles
+      
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+      }
+          
+      &::-webkit-scrollbar {
+        width: 6px;
+        background-color: #F5F5F5;
+      }
+          
+      &::-webkit-scrollbar-thumb {
+        background-color: #555;
+      }
+        
       .CodeMirror {
         background-color: rgb(48, 10, 36); //#000;
         color: #fff;

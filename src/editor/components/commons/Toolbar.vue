@@ -49,6 +49,7 @@ export default {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    margin-left: -15px;
     
     li {
       display: inline-block;
@@ -59,7 +60,7 @@ export default {
         text-transform: uppercase;
         display: inline-block;
         color: #fff;
-        padding: 9px 15px;
+        padding: 9px 10px;
         border-bottom: 5px solid transparent;
         transition: 0.25s;
         font-size: 18px;
