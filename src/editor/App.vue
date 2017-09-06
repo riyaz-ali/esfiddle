@@ -95,8 +95,9 @@ main.col {
         text-transform: uppercase;
         display: inline-block;
         color: #fff;
-        padding: 9px 15px;
-        font-size: 18px;
+        padding-left: 15px; 
+        line-height: 3;
+        font-size: 14px;
         font-weight: bold;
 
         &:hover {
