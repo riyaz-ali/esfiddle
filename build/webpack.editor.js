@@ -79,7 +79,8 @@ module.exports = {
     // Don't follow/bundle these modules, but request them at runtime from the environment
     'vue': 'Vue',   // window['Vue']
     'jshint': 'JSHINT',  // window['JSHINT']
-    'codemirror': 'CodeMirror'
+    'codemirror': 'CodeMirror', // window['CodeMirror']
+    'xterm': 'Terminal', // window['Terminal']  xterm exports the terminal symbol
   },
 
   plugins: [
