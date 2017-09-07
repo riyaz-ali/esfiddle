@@ -77,21 +77,15 @@ export default {
       "Press `ctrl + enter` or type 'run' to run fiddle",
     ].forEach(line => this._console.writeLine(line));
 
-    // some basic commands
-    [
-      // clear the console
-      function clear(a, {clear:c, release}) {
-        c();
-        release();
-      },
-      // display help
-      function help(a, {write, clear: c, release}) {
-        write("'save': save the fiddle");
-        write("'clear': clear the console");
-        write("'run': run the fiddle");
-        release();
-      }
-    ].forEach(cmd => this.addCommand(cmd.name, cmd));
+    // clear the console
+    this.addCommand('clear', function(a, {clear:c, release}) { c(); release(); })
+    // display help
+    this.addCommand('help', function(a, {write, release}) {
+      write("'save': save the fiddle");
+      write("'clear': clear the console");
+      write("'run': run the fiddle");
+      release();
+    });
   },
 
   /** Console interface API */
