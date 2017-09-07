@@ -4,7 +4,8 @@
     <Header class="row">
       <div class="col">
         <!-- common tools -->
-        <Toolbar />
+        <Toolbar :onRun="onRun" :onSave="onSave" :onLint="onLint" :onTidy="onTidy" />
+
         <!-- User Profile section -->
         <div class="esf user-profile">
           <ul>
@@ -29,7 +30,7 @@
       <main class="col">
         <div class="row flex-column">
           <!-- IDE -->
-          <IDE class="col" :lightsOn="true" />
+          <IDE class="col" :examples="examples" :lightsOn="true" :changePrivacy="onChangePrivacy" :loadExample="onLoadExample" />
           <!-- Console -->
           <Console class="col-auto" />
         </div>
@@ -56,9 +57,39 @@ export default {
     IDE,
     Console
   },
+
+  props: {
+    examples: { type: Array, required: true }
+  },
+
   data: function() {
     return {
-      isLoggedIn: true
+      isLoggedIn: false
+    }
+  },
+
+  /** application callback handlers */
+  methods: {
+    /** Toolbar buttons callback handlers */
+    onRun() {
+      console.log('Run request received');
+    },
+    onSave() {
+      console.log('Save request received');
+    },
+    onLint() {
+      console.log('Lint request received');
+    },
+    onTidy() {
+      console.log('Tidy request received');
+    },
+
+    /** IDE callback handlers */
+    onChangePrivacy(current, callback) {
+      callback(!current);
+    },
+    onLoadExample(index, callback) {
+      callback(this.examples[index].code);
     }
   }
 };

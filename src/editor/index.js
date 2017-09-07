@@ -19,7 +19,13 @@ const app = new Vue({
   components: {
     App,
   },
-  template: '<App />',
+  render(h) {
+    return h(App, {
+      props: {
+        examples: [{ title: 'Arrow Functions', code: 'const inc = v => v+1' }],
+      },
+    });
+  },
 });
 
 // get the mountpoint

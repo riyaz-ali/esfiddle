@@ -4,9 +4,9 @@
       <!-- Example presets -->
       <div class="examples">
         <span>Load Example </span>
-        <select id="example" @change="loadExample" v-model="currentExample">
+        <select id="example" @change="onLoadExample" v-model="currentExample">
           <option value="default" selected disabled>ES6 Examples</option>
-          <option v-for="ex in examples" :key="ex.title" :value="ex.val">{{ ex.title }}</option>
+          <option v-for="(ex, index) in examples" :key="ex.title" :value="index">{{ ex.title }}</option>
         </select>
       </div>
       <ul class="pull-right extra">
@@ -33,9 +33,11 @@ import CodeMirror from 'codemirror';
 
 export default {
   props: {
-    changePrivacy: { type: Function, default: function noop(){} },
-    lightsOn: { type: Boolean, default: true },
-    isPrivate: { type: Boolean, default: false }
+    changePrivacy:{ type: Function, required: true },
+    loadExample:  { type: Function, required: true },
+    lightsOn:     { type: Boolean,  default: true },
+    isPrivate:    { type: Boolean,  default: false },
+    examples:     { type: Array,    default: () => [] }
   },
   data: function(){
     return {
@@ -43,7 +45,6 @@ export default {
       lights: this.lightsOn,
       private: this.isPrivate,
       currentExample: "default",
-      examples: []
     }
   },
   mounted: function(){
@@ -59,11 +60,12 @@ export default {
       this.$ide.setOption('theme', (this.lights)? "mdn-like" : "mbo");
     },
     togglePrivacy: function() {
-      this.private = !this.private;
-      this.changePrivacy();
+      this.changePrivacy(this.private, privacy => this.private=privacy);
     },
-    loadExample: function() {
-      console.log(this.currentExample);
+    onLoadExample: function() {
+      this.loadExample(this.currentExample, value => {
+        this.$ide.setValue(value);
+      });
     }
   }
 }
