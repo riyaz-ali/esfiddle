@@ -30,9 +30,9 @@
       <main class="col">
         <div class="row flex-column">
           <!-- IDE -->
-          <IDE class="col" :examples="examples" :lightsOn="true" :changePrivacy="onChangePrivacy" :loadExample="onLoadExample" />
+          <IDE ref="$ide" class="col" :examples="examples" :lightsOn="true" :changePrivacy="onChangePrivacy" :loadExample="onLoadExample" />
           <!-- Console -->
-          <Console class="col-auto" />
+          <Console ref="$console" class="col-auto" />
         </div>
       </main>
     </div>
@@ -72,16 +72,16 @@ export default {
   methods: {
     /** Toolbar buttons callback handlers */
     onRun() {
-      console.log('Run request received');
+      this.$refs.$console.dispatchCommand('run');
     },
     onSave() {
-      console.log('Save request received');
+      this.$refs.$console.dispatchCommand('save');
     },
     onLint() {
-      console.log('Lint request received');
+      this.$refs.$console.dispatchCommand('lint');
     },
     onTidy() {
-      console.log('Tidy request received');
+      this.$refs.$console.dispatchCommand('tidy');
     },
 
     /** IDE callback handlers */
@@ -91,6 +91,19 @@ export default {
     onLoadExample(index, callback) {
       callback(this.examples[index].code);
     }
+  },
+
+  mounted: function() {
+    // configure console
+    // 1. save command
+    this.$refs.$console.addCommand('save', (a, { write, release }) => {
+      write('Saving fiddle...');
+      this.$api.save(this.$refs.$ide.value()).then(() => {
+        write('Fiddle saved!');
+      }).catch((reason) => {
+        write(reason || 'Cannot save fiddle! Try again later...');
+      }).then(release);
+    });
   }
 };
 </script>

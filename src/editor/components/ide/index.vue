@@ -55,17 +55,25 @@ export default {
     });
   },
   methods: {
-    toggleLight: function() {
+    toggleLight() {
       this.lights = !this.lights;
       this.$ide.setOption('theme', (this.lights)? "mdn-like" : "mbo");
     },
-    togglePrivacy: function() {
+    togglePrivacy() {
       this.changePrivacy(this.private, privacy => this.private=privacy);
     },
-    onLoadExample: function() {
+    onLoadExample() {
       this.loadExample(this.currentExample, value => {
         this.$ide.setValue(value);
       });
+    },
+    // unrestricted external interface to codemirror instance
+    value(val) {
+      if(val) {
+        return this.$ide.setValue(val);
+      } else {
+        return this.$ide.getValue();
+      }
     }
   }
 }

@@ -8,11 +8,17 @@ import { emptyNode, removeClass } from '@/util/DOMHelpers';
 // import libs
 import Vue from 'vue';
 
+// import API
+import $api from './api';
+
 // import stylesheets
 import './assets/hint.css';
 
 // import main application class
 import App from './App';
+
+// add API as a plugin to Vue
+Vue.use($api, { name: '$api' });
 
 // create a new Vue application
 const app = new Vue({
@@ -34,3 +40,6 @@ const mountPoint = document.getElementById('es-fiddle');
 emptyNode(mountPoint); removeClass(mountPoint, 'preload');
 // then mount the application onto it
 app.$mount(mountPoint);
+
+// [DEBUG]
+window.app = app;

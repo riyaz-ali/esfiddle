@@ -121,6 +121,11 @@ export default {
         // lock the console
         this.isConsoleLocked = true;
         let vm = this;
+
+        // write the command to the console
+        this._console.writeLine(`> ${cmd}`);
+
+        // call the handler
         handler({ /* no args parsing supported for now */ }, {
           write: this._console.writeLine.bind(this._console, `[${command}]`),
           clear: this._console.clear.bind(this._console),
