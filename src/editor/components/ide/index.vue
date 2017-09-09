@@ -74,6 +74,12 @@ export default {
       } else {
         return this.$ide.getValue();
       }
+    },
+    addError(line, message) {
+      this.$ide.addLineClass(line, 'background', 'line-error');
+    },
+    removeErrors() {
+      this.$ide.eachLine(line => this.$ide.removeLineClass(line, 'background', 'line-error'));
     }
   }
 }
@@ -159,6 +165,11 @@ export default {
 
     .CodeMirror {
       height: 100%;
+
+      // mark a line with error
+      .line-error {
+        background-color: rgba(239, 154, 154, 0.25);
+      }
     }
   }
 }

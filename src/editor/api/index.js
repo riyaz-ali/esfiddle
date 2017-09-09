@@ -42,6 +42,8 @@ export const API = (function (base) { // eslint-disable-line
   /** all submodules are passed a reference to the API 'class' and not an instance */
   [
     require('./save'),    // eslint-disable-line global-require
+    require('./lint'),    // eslint-disable-line global-require
+    require('./tidy'),    // eslint-disable-line global-require
   ].forEach(({ default: fn }) => fn(API));
 
   return API;
