@@ -9,6 +9,7 @@ let webpack = require('webpack');
 let HtmlPlugin = require('html-webpack-plugin');
 let HtmlHDDPlugin = require('html-webpack-harddisk-plugin');
 let CopyPlugin = require('copy-webpack-plugin');
+let ForceWritePlugin = require('write-file-webpack-plugin');
 //let ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 module.exports = {
@@ -80,7 +81,7 @@ module.exports = {
     'vue': 'Vue',   // window['Vue']
     'jshint': 'JSHINT',  // window['JSHINT']
     'codemirror': 'CodeMirror', // window['CodeMirror']
-    'xterm': 'Terminal', // window['Terminal']  xterm exports the terminal symbol
+    'beautify-js': 'js_beautify', // window['js_beautify']
   },
 
   plugins: [
@@ -93,7 +94,11 @@ module.exports = {
     new CopyPlugin([{
       from: path.resolve(__dirname, '../images'),
       to: '../images'
-    }])
+    }]),
+    new ForceWritePlugin({
+      test: /\.(png|gif|jpeg|jpg)$/,
+      useHashIndex: true,
+    })
   ],
 
   devtool: 'inline-source-map',
@@ -101,12 +106,9 @@ module.exports = {
   devServer: {
     port: 3000,
     proxy: {
-    //  '/': 'http://localhost:3001'
+      '/': 'http://localhost:3001'
     },
-    contentBase: [
-      path.resolve(__dirname, '../dist'), // for resolving styles
-      path.resolve(__dirname, '../'), // for resolving images that are still not copied when running dev-server
-    ],
+    contentBase: path.resolve(__dirname, '../dist'), // for resolving styles
     noInfo: true,
     overlay: true,
     quiet: true

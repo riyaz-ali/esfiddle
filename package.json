@@ -58,7 +58,8 @@
     "vue-template-compiler": "^2.4.2",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "write-file-webpack-plugin": "^4.1.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
