@@ -36,6 +36,9 @@
         </div>
       </main>
     </div>
+
+    <!-- notifications container -->
+    <notifications position="bottom right" />
   </div>
 </template>
 
@@ -98,20 +101,38 @@ export default {
     // 1. save command
     this.$refs.$console.addCommand('save', (a, { write, release }) => {
       write('Saving fiddle...');
+      this.$notify("Saving fiddle...");
       this.$api.save(this.$refs.$ide.value()).then(() => {
         write('Fiddle saved!');
+        this.$notify({
+          type: 'success',
+          text: 'Fiddle saved!'
+        });
       }).catch((reason) => {
         write(reason || 'Cannot save fiddle! Try again later...');
+        this.$notify({
+          type: 'error',
+          text: (reason || 'Cannot save fiddle! Try again later...'),
+        });
       }).then(release);
     });
 
     // 2. lint command
     this.$refs.$console.addCommand('lint', (a, { write, release }) => {
       write('Linting your code...')
+      this.$notify('Linting your code...');
       this.$refs.$ide.removeErrors();
       this.$api.lint(this.$refs.$ide.value()).then(() => {
         write('Hurray! Your code is lint free...');
+        this.$notify({
+          type: 'success',
+          text: 'Hurray! Your code is lint free...',
+        });
       }).catch((errors) => {
+        this.$notify({
+          type: 'error',
+          text: 'Lint failed',
+        });
         errors.forEach((error) => {
           write(`Line ${error.line}: ${error.reason}`);
           this.$refs.$ide.addError(error.line-1, error.reason)
@@ -122,8 +143,13 @@ export default {
     // 3. Tidy command
     this.$refs.$console.addCommand('tidy', (a, { write, release }) => {
       write("Tidying your code...");
+      this.$notify('Tidying your code...');
       this.$api.tidy(this.$refs.$ide.value()).then((beautified) => {
-        write("Done tidying! Your code looks good now...")
+        write('Done tidying! Your code looks good now...');
+        this.$notify({
+          type: 'success',
+          text: 'Done tidying! Your code looks good now...',
+        });
         this.$refs.$ide.value(beautified);
         release();
       });

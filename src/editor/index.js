@@ -7,6 +7,7 @@ import { emptyNode, removeClass } from '@/util/DOMHelpers';
 
 // import libs
 import Vue from 'vue';
+import Notifications from 'vue-notification';
 
 // import API
 import $api from './api';
@@ -19,6 +20,9 @@ import App from './App';
 
 // add API as a plugin to Vue
 Vue.use($api, { name: '$api' });
+
+// add notifications plugin
+Vue.use(Notifications);
 
 // create a new Vue application
 const app = new Vue({
