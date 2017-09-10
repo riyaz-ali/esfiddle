@@ -88,8 +88,16 @@ export default {
     },
 
     /** IDE callback handlers */
-    onChangePrivacy(current, callback) {
-      callback(!current);
+    onChangePrivacy(callback) {
+      this.$api.togglePrivacy()
+        .then(() => callback(true))
+        .catch((error) => {
+          this.$notify({
+            type: 'error',
+            text: error.message
+          });
+          callback(false);
+        })
     },
     onLoadExample(index, callback) {
       callback(this.examples[index].code);

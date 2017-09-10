@@ -44,6 +44,7 @@ export const API = (function (base) { // eslint-disable-line
     require('./save'),    // eslint-disable-line global-require
     require('./lint'),    // eslint-disable-line global-require
     require('./tidy'),    // eslint-disable-line global-require
+    require('./private'),    // eslint-disable-line global-require
   ].forEach(({ default: fn }) => fn(API));
 
   return API;

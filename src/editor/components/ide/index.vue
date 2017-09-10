@@ -60,7 +60,12 @@ export default {
       this.$ide.setOption('theme', (this.lights)? "mdn-like" : "mbo");
     },
     togglePrivacy() {
-      this.changePrivacy(this.private, privacy => this.private=privacy);
+      // for time being the server api only allows to make public -> private
+      // and not the reverse, i.e., private -> public
+      // so call the change routine only if the fiddle is public right now
+      // [TODO] this behaviour might be a good candidate for a fix/review
+      if (!this.private)
+        this.changePrivacy(privacy => this.private=privacy);
     },
     onLoadExample() {
       this.loadExample(this.currentExample, value => {
