@@ -66,7 +66,8 @@ export default {
       readOnly: "nocursor",
       lineWrapping: true,
       mode: "shell",
-      theme: "base16-dark"
+      theme: "base16-dark",
+      scrollbarStyle: "overlay",
     });
 
     // default lines
