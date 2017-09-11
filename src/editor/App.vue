@@ -3,7 +3,8 @@
     class="container-fluid" 
     @keydown.ctrl.83="onKeyEvent($event, 'save')"
     @keydown.ctrl.76="onKeyEvent($event, 'clear')"
-    @keydown.ctrl.13="onKeyEvent($event, 'run')">
+    @keydown.ctrl.13="onKeyEvent($event, 'run')"
+    @keydown.ctrl.192="onKeyEvent($event, 'toggle-console', true)">
 
     <!-- main header -->
     <Header class="row">
@@ -37,7 +38,7 @@
           <!-- IDE -->
           <IDE ref="$ide" class="col" :examples="examples" :lightsOn="true" :changePrivacy="onChangePrivacy" :loadExample="onLoadExample" />
           <!-- Console -->
-          <Console ref="$console" class="col-auto" />
+          <Console ref="$console" class="col-auto" :displayConsole="displayConsole" />
         </div>
       </main>
     </div>
@@ -72,7 +73,8 @@ export default {
 
   data: function() {
     return {
-      isLoggedIn: false
+      isLoggedIn: false,
+      displayConsole: true,
     }
   },
 
@@ -113,6 +115,13 @@ export default {
       event.preventDefault();
       if(!special)
         return this.$refs.$console.dispatchCommand(code);
+
+      // Aha! something special
+      switch(code) {
+        case 'toggle-console': {
+          this.displayConsole = !this.displayConsole;
+        } break;
+      }
     },
   },
 

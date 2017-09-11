@@ -50,9 +50,11 @@ CodeMirror.prototype.scrollToEnd = function() {
 }
 
 export default {
+  props: {
+    displayConsole: { type: Boolean, default: false },
+  },
   data: function() {
     return {
-      displayConsole: true,
       _console: null,
       command: "",
       commands: {
