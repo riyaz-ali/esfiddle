@@ -1,5 +1,10 @@
 <template>
-  <div class="container-fluid">
+  <div 
+    class="container-fluid" 
+    @keydown.ctrl.83="onKeyEvent($event, 'save')"
+    @keydown.ctrl.76="onKeyEvent($event, 'clear')"
+    @keydown.ctrl.13="onKeyEvent($event, 'run')">
+
     <!-- main header -->
     <Header class="row">
       <div class="col">
@@ -101,7 +106,14 @@ export default {
     },
     onLoadExample(index, callback) {
       callback(this.examples[index].code);
-    }
+    },
+
+    // global key events proxy
+    onKeyEvent(event, code, special=false) {
+      event.preventDefault();
+      if(!special)
+        return this.$refs.$console.dispatchCommand(code);
+    },
   },
 
   mounted: function() {
